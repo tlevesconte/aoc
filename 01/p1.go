@@ -1,36 +1,8 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"slices"
-	"strconv"
-	"strings"
-)
+import "slices"
 
-func main() {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(solve(file))
-}
-
-func solve(input *os.File) int {
-	scanner := bufio.NewScanner(input)
-
-	var left, right []int
-	for scanner.Scan() {
-		line := strings.Fields(scanner.Text())
-
-		a, _ := strconv.Atoi(line[0])
-		b, _ := strconv.Atoi(line[1])
-
-		left = append(left, a)
-		right = append(right, b)
-	}
-
+func solveP1(left, right []int) int {
 	slices.Sort(left)
 	slices.Sort(right)
 
