@@ -25,7 +25,6 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-
 		b, err := strconv.Atoi(line[1])
 		if err != nil {
 			panic(err)
