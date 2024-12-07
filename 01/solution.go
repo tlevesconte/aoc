@@ -44,13 +44,13 @@ func solveP1(left, right []int) int {
 
 	var diff int
 	for i := range left {
-		diff += abs(left[i], right[i])
+		diff += absDiff(left[i], right[i])
 	}
 
 	return diff
 }
 
-func abs(x, y int) int {
+func absDiff(x, y int) int {
 	if x < y {
 		return y - x
 	}
