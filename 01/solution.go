@@ -10,10 +10,7 @@ import (
 )
 
 func main() {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		panic(err)
-	}
+	file, _ := os.Open("input.txt")
 
 	scanner := bufio.NewScanner(file)
 
@@ -21,14 +18,8 @@ func main() {
 	for scanner.Scan() {
 		line := strings.Fields(scanner.Text())
 
-		a, err := strconv.Atoi(line[0])
-		if err != nil {
-			panic(err)
-		}
-		b, err := strconv.Atoi(line[1])
-		if err != nil {
-			panic(err)
-		}
+		a, _ := strconv.Atoi(line[0])
+		b, _ := strconv.Atoi(line[1])
 
 		left = append(left, a)
 		right = append(right, b)
@@ -44,17 +35,10 @@ func solveP1(left, right []int) int {
 
 	var diff int
 	for i := range left {
-		diff += absDiff(left[i], right[i])
+		diff += abs(left[i], right[i])
 	}
 
 	return diff
-}
-
-func absDiff(x, y int) int {
-	if x < y {
-		return y - x
-	}
-	return x - y
 }
 
 func solveP2(left, right []int) int {
@@ -69,4 +53,11 @@ func solveP2(left, right []int) int {
 	}
 
 	return simScore
+}
+
+func abs(x, y int) int {
+	if x < y {
+		return y - x
+	}
+	return x - y
 }
