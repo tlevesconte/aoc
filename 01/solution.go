@@ -9,26 +9,6 @@ import (
 	"strings"
 )
 
-func main() {
-	file, _ := os.Open("input.txt")
-
-	scanner := bufio.NewScanner(file)
-
-	var left, right []int
-	for scanner.Scan() {
-		line := strings.Fields(scanner.Text())
-
-		a, _ := strconv.Atoi(line[0])
-		b, _ := strconv.Atoi(line[1])
-
-		left = append(left, a)
-		right = append(right, b)
-	}
-
-	fmt.Println("01/P1:", solveP1(left, right))
-	fmt.Println("01/P2:", solveP2(left, right))
-}
-
 func solveP1(left, right []int) int {
 	slices.Sort(left)
 	slices.Sort(right)
@@ -60,4 +40,24 @@ func abs(x, y int) int {
 		return y - x
 	}
 	return x - y
+}
+
+func main() {
+	file, _ := os.Open("input.txt")
+
+	scanner := bufio.NewScanner(file)
+
+	var left, right []int
+	for scanner.Scan() {
+		line := strings.Fields(scanner.Text())
+
+		a, _ := strconv.Atoi(line[0])
+		b, _ := strconv.Atoi(line[1])
+
+		left = append(left, a)
+		right = append(right, b)
+	}
+
+	fmt.Println("01/P1:", solveP1(left, right))
+	fmt.Println("01/P2:", solveP2(left, right))
 }

@@ -8,11 +8,6 @@ import (
 	"strings"
 )
 
-func main() {
-	fmt.Println("02/P1:", solveP1())
-	fmt.Println("02/P2:", solveP2())
-}
-
 func solveP1() int {
 	file, _ := os.Open("input.txt")
 
@@ -96,4 +91,9 @@ func abs(x, y int) int {
 	}
 
 	return x - y
+}
+
+func main() {
+	fmt.Println("02/P1:", solveP1())
+	fmt.Println("02/P2:", solveP2())
 }
