@@ -8,24 +8,40 @@ import (
 	"strconv"
 )
 
-func solveP1() int {
-	file, _ := os.Open("input.txt")
+func solveP1(input string) int {
+	re := regexp.MustCompile(`mul\((\d+),(\d+)\)`)
+	ms := re.FindAllStringSubmatch(input, -1)
 
-	scanner := bufio.NewScanner(file)
-	
-	re := regexp.MustCompile(`mul\((-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)\)`)
-	rr := regexp.MustCompile(`-?\d+(\.\d+)?`)
+	mulSum := 0
+	for _, m := range ms {
+		x, _ := strconv.Atoi(m[1])
+		y, _ := strconv.Atoi(m[2])
 
-	var mulSum int
-	for scanner.Scan() {
-		strs := re.FindAllString(scanner.Text(), -1)
-		for _, str := range strs {
-			nums := rr.FindAllString(str, -1)
+		mulSum += x * y
+	}
 
-			x, _ := strconv.Atoi(nums[0])
-			y, _ := strconv.Atoi(nums[1])
+	return mulSum
+}
 
-			mulSum += x * y
+func solveP2(input string) int {
+	re := regexp.MustCompile(`mul\((\d+),(\d+)\)|don't\(\)|do\(\)`)
+	ms := re.FindAllStringSubmatch(input, -1)
+
+	mulSum := 0
+	enabled := true
+	for _, m := range ms {
+		switch m[0] {
+		case "do()":
+			enabled = true
+		case "don't()":
+			enabled = false
+		default:
+			if enabled {
+				x, _ := strconv.Atoi(m[1])
+				y, _ := strconv.Atoi(m[2])
+
+				mulSum += x * y
+			}
 		}
 	}
 
@@ -33,5 +49,15 @@ func solveP1() int {
 }
 
 func main() {
-	fmt.Println("03/P1:", solveP1())
+	file, _ := os.Open("input.txt")
+
+	scanner := bufio.NewScanner(file)
+
+	var text string
+	for scanner.Scan() {
+		text += scanner.Text()
+	}
+
+	fmt.Println("03/P1:", solveP1(text))
+	fmt.Println("03/P2:", solveP2(text))
 }
